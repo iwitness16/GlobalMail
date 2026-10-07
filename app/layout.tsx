@@ -49,17 +49,15 @@ export default function RootLayout({
         <Toaster />
         {process.env.NODE_ENV === 'production' && <Analytics />}
 
-        {/* Smartsupp Live Chat */}
-        <Script id="smartsupp" strategy="afterInteractive">{`
+        {/* Smartsupp Live Chat — key must be set before loader runs */}
+        <Script id="smartsupp-config" strategy="beforeInteractive">{`
           var _smartsupp = _smartsupp || {};
           _smartsupp.key = 'a19926fa72635db4520e241ae74f661de64b3365';
-          window.smartsupp||(function(d) {
-            var s,c,o=smartsupp=function(){ o._.push(arguments)};o._=[];
-            s=d.getElementsByTagName('script')[0];c=d.createElement('script');
-            c.type='text/javascript';c.charset='utf-8';c.async=true;
-            c.src='https://www.smartsuppchat.com/loader.js?';s.parentNode.insertBefore(c,s);
-          })(document);
         `}</Script>
+        <Script
+          src="https://www.smartsuppchat.com/loader.js?"
+          strategy="afterInteractive"
+        />
       </body>
     </html>
   )
